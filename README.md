@@ -41,13 +41,31 @@ gsp_python
 
 ### Task 2.1: Analysis of Co-occurrence Patterns of Points of Interest (POI) [Part 1]
 #### Objective:
-- [Add the objective here]
+Analyze the co-occurrence patterns of different Points of Interest (POI) within each city. Identify types of POIs that frequently appear together within the same grid cell.
 
-#### Method:
-- [Add the method here]
+#### Methodology:
+The analysis was performed using an optimized Apriori algorithm to identify frequent itemsets of POIs. The algorithm was enhanced with:
+   - **Efficient Candidate Generation**: Ensures only candidates derived from frequent subsets are considered.
+   - **Hash-Based Pruning**: Eliminates candidates early by verifying that all subsets are frequent.
+   - **Early Termination**: Stops iterations once no new frequent itemsets are found, reducing computation time.
+Cross-validation was conducted using the <ins>mlxtend</ins> library to ensure the algorithm's accuracy.
 
-#### Approach:
-- [Describe the approach here]
+#### Steps:
+1. **Data Preprocessing**:
+   - Each grid cell was treated as a "basket" containing the POI categories present within that cell.
+   - Quantities of POIs were ignored, considering only their presence or absence.
+
+2. **Data Analysis**:
+   - The optimized Apriori algorithm was applied to identify frequent POI itemsets for each city.
+   - Minimum support (minsup) thresholds were varied between 0.1 and 0.3:
+      - Intervals of 0.01 between 0.1 and 0.2.
+      - Intervals of 0.05 between 0.2 and 0.3.
+   - Only itemsets with more than one POI category were considered relevant
+
+#### Results:
+   - At minsup = 0.15, **six** frequent itemsets were identified across three or more cities, including:
+      - '**Transit Station**' and '**Heavy Industry**', suggesting industrial hubs near transit points.
+      - '**Building Material**' and '**Home Appliances**', reflecting co-location of retail or industrial suppliers.
 
 ### Task 2.2: Mining Sequential Patterns [Part 2]
 #### Objective:
